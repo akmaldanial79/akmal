@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Battle Game</title>
+  <style>
+    /* Define team colors */
+    .team1 { background-color: red; }
+    .team2 { background-color: blue; }
+    .team3 { background-color: green; }
+  </style>
+</head>
+<body>
+  <h1>TikTok Battle Game</h1>
+  <div id="battleLog"></div>
+  <button onclick="chooseTeam(1)" class="team1">Choose Team 1</button>
+  <button onclick="chooseTeam(2)" class="team2">Choose Team 2</button>
+  <button onclick="chooseTeam(3)" class="team3">Choose Team 3</button>
+  <button onclick="startBattle()">Start Battle</button>
+
+  <script>
+    let playerTeam = 0; // Variable to store the player's chosen team
+    let playerHealth = 5; // Initial health for each player
+
+    function chooseTeam(team) {
+      playerTeam = team;
+      document.getElementById('battleLog').innerHTML += Player has chosen Team ${team}<br>;
+    }
+
+    function startBattle() {
+      if (playerTeam === 0) {
+        document.getElementById('battleLog').innerHTML += 'Please choose a team before starting the battle!<br>';
+        return;
+      }
+
+      // Start the battle
+      document.getElementById('battleLog').innerHTML += Battle has started! Player is on Team ${playerTeam}<br>;
+      // Add your battle initialization logic here
+    }
+
+    function throwStone() {
+      if (playerTeam === 0) {
+        document.getElementById('battleLog').innerHTML += 'Please choose a team before throwing a stone!<br>';
+        return;
+      }
+
+      // Reduce player's health when hit by a stone
+      playerHealth--;
+
+      document.getElementById('battleLog').innerHTML += Team ${playerTeam} threw a stone! Player health: ${playerHealth}<br>;
+
+      // Check if player is "dead"
+      if (playerHealth === 0) {
+        document.getElementById('battleLog').innerHTML += Player on Team ${playerTeam} is dead!<br>;
+      }
+    }
+
+    document.addEventListener('keyup', function (event) {
+      if (event.key === '5') {
+        throwStone();
+      }
+    });
+  </script>
+</body>
+</html>
